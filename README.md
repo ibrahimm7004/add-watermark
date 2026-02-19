@@ -1,8 +1,8 @@
 # wmk: Python CLI to watermark images (batch watermark, logo watermark, text watermark)
 
 [![CI](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml/badge.svg)](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml)
-[![PyPI version](https://img.shields.io/pypi/v/add-watermark.svg)](https://pypi.org/project/add-watermark/)
-[![Python versions](https://img.shields.io/pypi/pyversions/add-watermark.svg)](https://pypi.org/project/add-watermark/)
+[![PyPI version](https://img.shields.io/pypi/v/add-watermark.svg?cacheSeconds=300)](https://pypi.org/project/add-watermark/)
+[![Python versions](https://img.shields.io/pypi/pyversions/add-watermark.svg?cacheSeconds=300)](https://pypi.org/project/add-watermark/)
 [![License](https://img.shields.io/github/license/ibrahimm7004/add-watermark.svg)](LICENSE)
 
 Python CLI for batch image watermarking with logo or text.
