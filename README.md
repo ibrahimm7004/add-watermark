@@ -15,7 +15,12 @@ Python CLI for batch image watermarking with logo or text.
 pipx install add-watermark
 wmk add
 # Expert one-liner: add text watermark to photo
-wmk add --input ".\photo.jpg" --text "(c) ACME" --pos br --opacity 40
+wmk add --input ".\photo.jpg" --text "My Watermark" --pos br --opacity 40
+```
+
+```powershell
+# Or add an image watermark to photo
+wmk add --input ".\photo.jpg" --watermark ".\watermark.png" --pos br --opacity 40
 ```
 
 ## Install add-watermark for batch watermark, logo watermark, and text watermark
@@ -109,7 +114,7 @@ wmk add
 Single image with text watermark:
 
 ```powershell
-wmk add --input ".\photo.jpg" --text "(c) ACME Studio" --pos br --opacity 40
+wmk add --input ".\photo.jpg" --text "My Watermark" --pos br --opacity 40
 ```
 
 Single image with logo watermark:
@@ -127,7 +132,7 @@ wmk add --input ".\photos" --watermark ".\logo.png" --pos br --opacity 35
 Batch watermark folder recursively:
 
 ```powershell
-wmk add --input ".\photos" --recursive --text "(c) ACME" --pos br --opacity 35
+wmk add --input ".\photos" --recursive --text "My Watermark" --pos br --opacity 35
 ```
 
 Glob input:
@@ -168,7 +173,7 @@ wmk add --input ".\photos" --watermark ".\logo.png" --dry-run
 - PowerShell example:
 
 ```powershell
-wmk add --input ".\My Photos\Client A" --recursive --text "(c) ACME" --pos br --opacity 35
+wmk add --input ".\My Photos\Client A" --recursive --text "My Watermark" --pos br --opacity 35
 ```
 
 - CMD example:
@@ -243,7 +248,7 @@ from watermarker.engine import process_single
 process_single(
     input_path=Path("photo.jpg"),
     output_path=Path("photo_watermarked.jpg"),
-    text="(c) ACME",
+    text="My Watermark",
     position="br",
     opacity=35,
     overwrite=True,
