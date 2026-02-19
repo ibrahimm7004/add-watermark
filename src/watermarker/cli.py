@@ -29,6 +29,63 @@ app = typer.Typer(
 )
 console = Console()
 
+INPUT_OPTION = typer.Option(
+    None,
+    "--input",
+    "-i",
+    help="Input image file, folder path, or glob pattern.",
+)
+OUTPUT_OPTION = typer.Option(
+    None,
+    "--output",
+    "-o",
+    help="Output file (single mode) or output folder (batch mode).",
+)
+WATERMARK_OPTION = typer.Option(
+    None,
+    "--watermark",
+    "-w",
+    help="Watermark image path.",
+)
+TEXT_OPTION = typer.Option(
+    None,
+    "--text",
+    "-t",
+    help="Text watermark content.",
+)
+POSITION_OPTION = typer.Option(
+    None,
+    "--pos",
+    help="Watermark position: tl, tr, bl, br, c.",
+)
+OPACITY_OPTION = typer.Option(
+    None,
+    "--opacity",
+    min=0,
+    max=100,
+    help="Watermark opacity from 0 (invisible) to 100 (fully visible).",
+)
+RECURSIVE_OPTION = typer.Option(
+    False,
+    "--recursive",
+    help="Process subfolders recursively when --input points to a folder.",
+)
+OVERWRITE_OPTION = typer.Option(
+    False,
+    "--overwrite",
+    help="Overwrite output files when they already exist.",
+)
+DRY_RUN_OPTION = typer.Option(
+    False,
+    "--dry-run",
+    help="Print planned outputs without writing files.",
+)
+VERBOSE_OPTION = typer.Option(
+    False,
+    "--verbose",
+    help="Show traceback details for errors.",
+)
+
 
 @app.callback()
 def root() -> None:
@@ -104,7 +161,12 @@ def _single_output_path(input_path: Path, output: str | None, overwrite: bool) -
     return ensure_unique_path(target)
 
 
-def _batch_output_root(mode: str, input_value: str, output: str | None, source_root: Path | None) -> Path:
+def _batch_output_root(
+    mode: str,
+    input_value: str,
+    output: str | None,
+    source_root: Path | None,
+) -> Path:
     if output:
         return Path(output)
 
@@ -125,62 +187,16 @@ def _print_batch_summary(result: BatchResult, dry_run: bool) -> None:
 
 @app.command()
 def add(
-    input_value: str | None = typer.Option(
-        None,
-        "--input",
-        "-i",
-        help="Input image file, folder path, or glob pattern.",
-    ),
-    output: str | None = typer.Option(
-        None,
-        "--output",
-        "-o",
-        help="Output file (single mode) or output folder (batch mode).",
-    ),
-    watermark: Path | None = typer.Option(
-        None,
-        "--watermark",
-        "-w",
-        help="Watermark image path.",
-    ),
-    text: str | None = typer.Option(
-        None,
-        "--text",
-        "-t",
-        help="Text watermark content.",
-    ),
-    pos: str | None = typer.Option(
-        None,
-        "--pos",
-        help="Watermark position: tl, tr, bl, br, c.",
-    ),
-    opacity: int | None = typer.Option(
-        None,
-        "--opacity",
-        min=0,
-        max=100,
-        help="Watermark opacity from 0 (invisible) to 100 (fully visible).",
-    ),
-    recursive: bool = typer.Option(
-        False,
-        "--recursive",
-        help="Process subfolders recursively when --input points to a folder.",
-    ),
-    overwrite: bool = typer.Option(
-        False,
-        "--overwrite",
-        help="Overwrite output files when they already exist.",
-    ),
-    dry_run: bool = typer.Option(
-        False,
-        "--dry-run",
-        help="Print planned outputs without writing files.",
-    ),
-    verbose: bool = typer.Option(
-        False,
-        "--verbose",
-        help="Show traceback details for errors.",
-    ),
+    input_value: str | None = INPUT_OPTION,
+    output: str | None = OUTPUT_OPTION,
+    watermark: Path | None = WATERMARK_OPTION,
+    text: str | None = TEXT_OPTION,
+    pos: str | None = POSITION_OPTION,
+    opacity: int | None = OPACITY_OPTION,
+    recursive: bool = RECURSIVE_OPTION,
+    overwrite: bool = OVERWRITE_OPTION,
+    dry_run: bool = DRY_RUN_OPTION,
+    verbose: bool = VERBOSE_OPTION,
 ) -> None:
     """Add image or text watermarks to single images or batches."""
     interactive = input_value is None or (watermark is None and text is None)

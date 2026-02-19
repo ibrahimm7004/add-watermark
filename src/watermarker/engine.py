@@ -168,7 +168,11 @@ def _build_image_stamp(base_size: tuple[int, int], watermark_path: Path) -> Imag
     return watermark
 
 
-def _build_text_stamp(base_size: tuple[int, int], text: str, font_path: Path | None = None) -> Image.Image:
+def _build_text_stamp(
+    base_size: tuple[int, int],
+    text: str,
+    font_path: Path | None = None,
+) -> Image.Image:
     clean_text = text.strip()
     if not clean_text:
         raise ValidationError("Text watermark cannot be empty.")

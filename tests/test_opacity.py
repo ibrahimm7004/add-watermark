@@ -1,6 +1,6 @@
 import pytest
 
-from watermarker.engine import opacity_to_alpha
+from watermarker.engine import ValidationError, opacity_to_alpha
 
 
 def test_opacity_to_alpha_endpoints() -> None:
@@ -14,6 +14,6 @@ def test_opacity_to_alpha_midpoint() -> None:
 
 @pytest.mark.parametrize("value", [-1, 101])
 def test_opacity_to_alpha_rejects_out_of_range(value: int) -> None:
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         opacity_to_alpha(value)
 
