@@ -65,6 +65,9 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
 
+[tool.ruff.lint.per-file-ignores]
+"src/watermarker/__main__.py" = ["I001"]
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
