@@ -22,7 +22,7 @@ from watermarker.engine import (
 )
 
 app = typer.Typer(
-    name="watermarker",
+    name="wmk",
     help="Python CLI for batch image watermarking with logo or text.",
     add_completion=False,
     no_args_is_help=True,
@@ -89,7 +89,7 @@ VERBOSE_OPTION = typer.Option(
 
 @app.callback()
 def root() -> None:
-    """Watermarker command group."""
+    """wmk command group."""
 
 
 def _prompt_choice(prompt: str, options: list[str], default: str) -> str:

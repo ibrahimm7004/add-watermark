@@ -1,4 +1,4 @@
-# watermarker: Python CLI to watermark images (batch watermark, logo watermark, text watermark)
+# wmk: Python CLI to watermark images (batch watermark, logo watermark, text watermark)
 
 [![CI](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml/badge.svg)](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml)
 [![PyPI version](https://img.shields.io/pypi/v/add-watermark.svg)](https://pypi.org/project/add-watermark/)
@@ -7,21 +7,20 @@
 
 Python CLI for batch image watermarking with logo or text.
 
-`watermarker` is built for people searching "how to add watermark to image", "add watermark to photo", "put watermark on picture", "add logo to image", "add text watermark to photo", "batch watermark images", "watermark multiple photos at once", and "protect photos with watermark" without uploading files to an online service.
+`wmk` is built for people searching "how to add watermark to image", "add watermark to photo", "put watermark on picture", "add logo to image", "add text watermark to photo", "batch watermark images", "watermark multiple photos at once", and "protect photos with watermark" without uploading files to an online service.
 
 ## 20-Second Quickstart: watermark images with a Python CLI
 
 ```powershell
 pipx install add-watermark
-watermarker add
+wmk add
 # Expert one-liner: add text watermark to photo
-watermarker add --input ".\photo.jpg" --text "(c) ACME" --pos br --opacity 40
+wmk add --input ".\photo.jpg" --text "(c) ACME" --pos br --opacity 40
 ```
 
 ## Install add-watermark for batch watermark, logo watermark, and text watermark
 
-PyPI package name: `add-watermark`; CLI command: `watermarker`
-Commands: `watermarker` (primary), `wm` (short), `add-watermark` (alias)
+PyPI package name: `add-watermark`; CLI commands: `wmk` (primary) and `add-watermark` (alias).
 
 ### A) Install (Recommended): pipx
 
@@ -84,48 +83,48 @@ python examples/generate_examples.py
 Beginner wizard:
 
 ```powershell
-watermarker add
+wmk add
 ```
 
 Single image with text watermark:
 
 ```powershell
-watermarker add --input ".\photo.jpg" --text "(c) ACME Studio" --pos br --opacity 40
+wmk add --input ".\photo.jpg" --text "(c) ACME Studio" --pos br --opacity 40
 ```
 
 Single image with logo watermark:
 
 ```powershell
-watermarker add --input ".\photo.jpg" --watermark ".\logo.png" --pos tr --opacity 35
+wmk add --input ".\photo.jpg" --watermark ".\logo.png" --pos tr --opacity 35
 ```
 
 Batch watermark folder:
 
 ```powershell
-watermarker add --input ".\photos" --watermark ".\logo.png" --pos br --opacity 35
+wmk add --input ".\photos" --watermark ".\logo.png" --pos br --opacity 35
 ```
 
 Batch watermark folder recursively:
 
 ```powershell
-watermarker add --input ".\photos" --recursive --text "(c) ACME" --pos br --opacity 35
+wmk add --input ".\photos" --recursive --text "(c) ACME" --pos br --opacity 35
 ```
 
 Glob input:
 
 ```powershell
-watermarker add --input ".\photos\**\*.png" --watermark ".\logo.png" --opacity 35
+wmk add --input ".\photos\**\*.png" --watermark ".\logo.png" --opacity 35
 ```
 
 Dry run (plan only):
 
 ```powershell
-watermarker add --input ".\photos" --watermark ".\logo.png" --dry-run
+wmk add --input ".\photos" --watermark ".\logo.png" --dry-run
 ```
 
 ## Defaults
 
-`watermarker add` defaults (from current implementation):
+`wmk add` defaults (from current implementation):
 
 - Default position: `br`
 - Default opacity: `35` (`0` is invisible, `100` is fully visible)
@@ -149,13 +148,13 @@ watermarker add --input ".\photos" --watermark ".\logo.png" --dry-run
 - PowerShell example:
 
 ```powershell
-watermarker add --input ".\My Photos\Client A" --recursive --text "(c) ACME" --pos br --opacity 35
+wmk add --input ".\My Photos\Client A" --recursive --text "(c) ACME" --pos br --opacity 35
 ```
 
 - CMD example:
 
 ```cmd
-watermarker add --input ".\My Photos\*.jpg" --watermark ".\brand logo.png" --pos tr --opacity 35
+wmk add --input ".\My Photos\*.jpg" --watermark ".\brand logo.png" --pos tr --opacity 35
 ```
 
 ## Why offline CLI (vs online watermark tools)
@@ -192,7 +191,7 @@ If you are searching for "add watermark to image online free", an offline CLI is
 ## CLI reference
 
 ```text
-watermarker add [OPTIONS]
+wmk add [OPTIONS]
 
 Options:
   --input, -i      File path, folder path, or glob pattern
@@ -243,7 +242,7 @@ process_single(
 
 ## FAQ and troubleshooting
 
-### `watermarker` command is not found on Windows
+### `wmk` command is not found on Windows
 
 - For `pipx` installs, run `pipx ensurepath` and restart terminal.
 - For `pip` installs, ensure your Python Scripts directory is on PATH.
@@ -264,3 +263,4 @@ ruff check .
 ruff format --check .
 pytest
 ```
+

@@ -37,8 +37,7 @@ Issues = "https://github.com/ibrahimm7004/add-watermark/issues"
 Changelog = "https://github.com/ibrahimm7004/add-watermark/blob/main/CHANGELOG.md"
 
 [project.scripts]
-watermarker = "watermarker.cli:app"
-wm = "watermarker.cli:app"
+wmk = "watermarker.cli:app"
 add-watermark = "watermarker.cli:app"
 
 [project.optional-dependencies]

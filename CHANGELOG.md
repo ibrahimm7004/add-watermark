@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Changed primary CLI command to `wmk`; removed `watermarker` and `wm` entrypoints; kept `add-watermark` alias.
 - Changed PyPI distribution name to `add-watermark`; updated README install instructions and badges.
 - Fixed project metadata URLs in `pyproject.toml` to point to the real GitHub repository.
 - Added Windows CI coverage (`windows-latest`) alongside Linux with Python 3.10, 3.11, and 3.12.
