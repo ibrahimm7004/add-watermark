@@ -7,7 +7,7 @@
 
 Python CLI for batch image watermarking with logo or text.
 
-`wmk` is built for people searching "how to add watermark to image", "add watermark to photo", "put watermark on picture", "add logo to image", "add text watermark to photo", "batch watermark images", "watermark multiple photos at once", and "protect photos with watermark".
+`wmk` is built for people searching "how to add watermark to image", "add watermark to photo", "put watermark on picture", "add logo to image", "add text watermark to photo", "batch watermark images", "watermark multiple photos at once", "watermarker", and "protect photos with watermark".
 
 ## 20-Second Quickstart: watermark images with a Python CLI
 
