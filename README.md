@@ -12,11 +12,13 @@ Python CLI for batch image watermarking with logo or text.
 ## 20-Second Quickstart: watermark images with a Python CLI
 
 ```powershell
-pipx install add-watermark
+python -m pip install add-watermark
 wmk add
 # Expert one-liner: add text watermark to photo
 wmk add --input ".\photo.jpg" --text "My Watermark" --pos br --opacity 40
 ```
+
+pipx users: use `pipx install add-watermark` for isolated CLI installs.
 
 ```powershell
 # Or add an image watermark to photo
@@ -27,22 +29,22 @@ wmk add --input ".\photo.jpg" --watermark ".\watermark.png" --pos br --opacity 4
 
 PyPI package name: `add-watermark`; CLI commands: `wmk` (primary) and `add-watermark` (alias).
 
-### A) Install (Recommended): pipx
-
-```powershell
-pipx install add-watermark
-```
-
-If `pipx` is not on PATH yet:
-
-```powershell
-pipx ensurepath
-```
-
-### B) Install (Alternative): pip
+### A) Install (Primary): pip
 
 ```powershell
 python -m pip install add-watermark
+```
+
+Recommended for most users; use inside a virtual environment if you prefer.
+
+### Install with pipx (isolated CLI)
+
+pipx installs CLI tools into isolated environments to avoid dependency conflicts.
+
+```powershell
+python -m pip install --user pipx
+python -m pipx ensurepath
+pipx install add-watermark
 ```
 
 ### C) Install from source (repo clone)
@@ -52,23 +54,23 @@ git clone https://github.com/ibrahimm7004/add-watermark.git
 cd add-watermark
 ```
 
-Install from this repo with `pipx`:
-
-```powershell
-pipx install .
-```
-
 Install from this repo with `pip`:
 
 ```powershell
 python -m pip install .
 ```
 
+Install from this repo with `pipx`:
+
+```powershell
+pipx install .
+```
+
 ### D) Uninstall (pipx and pip)
 
 ```powershell
-pipx uninstall add-watermark
 python -m pip uninstall add-watermark
+pipx uninstall add-watermark
 ```
 
 You can also run the beginner-friendly alias:
