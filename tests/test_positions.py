@@ -19,4 +19,3 @@ def test_compute_position_br_respects_margin() -> None:
 
 def test_compute_position_center() -> None:
     assert compute_position((200, 100), (40, 20), "c", margin=24) == (80, 40)
-

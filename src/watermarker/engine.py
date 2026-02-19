@@ -426,4 +426,3 @@ def process_batch(
             result.failures.append((input_file, f"Unexpected error: {exc}"))
 
     return result
-

@@ -93,4 +93,3 @@ def test_process_single_avoids_collision_when_not_overwriting(tmp_path: Path) ->
     assert second_path.exists()
     assert first_path != second_path
     assert "_watermarked" in second_path.stem
-
