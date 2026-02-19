@@ -1,8 +1,8 @@
 # watermarker: Python CLI to watermark images (batch watermark, logo watermark, text watermark)
 
 [![CI](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml/badge.svg)](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml)
-[![PyPI version](https://img.shields.io/pypi/v/watermarker.svg)](https://pypi.org/project/watermarker/)
-[![Python versions](https://img.shields.io/pypi/pyversions/watermarker.svg)](https://pypi.org/project/watermarker/)
+[![PyPI version](https://img.shields.io/pypi/v/add-watermark.svg)](https://pypi.org/project/add-watermark/)
+[![Python versions](https://img.shields.io/pypi/pyversions/add-watermark.svg)](https://pypi.org/project/add-watermark/)
 [![License](https://img.shields.io/github/license/ibrahimm7004/add-watermark.svg)](LICENSE)
 
 Python CLI for batch image watermarking with logo or text.
@@ -12,18 +12,21 @@ Python CLI for batch image watermarking with logo or text.
 ## 20-Second Quickstart: watermark images with a Python CLI
 
 ```powershell
-pipx install watermarker
+pipx install add-watermark
 watermarker add
 # Expert one-liner: add text watermark to photo
 watermarker add --input ".\photo.jpg" --text "(c) ACME" --pos br --opacity 40
 ```
 
-## Install watermarker for batch watermark, logo watermark, and text watermark
+## Install add-watermark for batch watermark, logo watermark, and text watermark
+
+PyPI package name: `add-watermark`; CLI command: `watermarker`
+Commands: `watermarker` (primary), `wm` (short), `add-watermark` (alias)
 
 ### A) Install (Recommended): pipx
 
 ```powershell
-pipx install watermarker
+pipx install add-watermark
 ```
 
 If `pipx` is not on PATH yet:
@@ -35,7 +38,7 @@ pipx ensurepath
 ### B) Install (Alternative): pip
 
 ```powershell
-python -m pip install watermarker
+python -m pip install add-watermark
 ```
 
 ### C) Install from source (repo clone)
@@ -60,8 +63,8 @@ python -m pip install .
 ### D) Uninstall (pipx and pip)
 
 ```powershell
-pipx uninstall watermarker
-python -m pip uninstall watermarker
+pipx uninstall add-watermark
+python -m pip uninstall add-watermark
 ```
 
 ## Before and after: put watermark on picture
