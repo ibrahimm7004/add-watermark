@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-02-19
+
 ### Changed
 
 - Changed primary CLI command to `wmk`; removed `watermarker` and `wm` entrypoints; kept `add-watermark` alias.
@@ -35,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - Test suite for positioning, opacity mapping, and integration watermarking.
 - GitHub Actions CI for lint, format checks, and tests.
 
-[Unreleased]: https://github.com/ibrahimm7004/add-watermark/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ibrahimm7004/add-watermark/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/ibrahimm7004/add-watermark/releases/tag/v0.1.1
 [0.1.0]: https://github.com/ibrahimm7004/add-watermark/releases/tag/v0.1.0
 
