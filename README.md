@@ -1,194 +1,262 @@
-# watermarker
+# watermarker: Python CLI to watermark images (batch watermark, logo watermark, text watermark)
+
+[![CI](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml/badge.svg)](https://github.com/ibrahimm7004/add-watermark/actions/workflows/ci.yml)
+[![PyPI version](https://img.shields.io/pypi/v/watermarker.svg)](https://pypi.org/project/watermarker/)
+[![Python versions](https://img.shields.io/pypi/pyversions/watermarker.svg)](https://pypi.org/project/watermarker/)
+[![License](https://img.shields.io/github/license/ibrahimm7004/add-watermark.svg)](LICENSE)
 
 Python CLI for batch image watermarking with logo or text.
 
-`watermarker` is a production-focused command-line tool for applying image or text watermarks to single images, folders, or glob matches.
+`watermarker` is built for people searching "how to add watermark to image", "add watermark to photo", "put watermark on picture", "add logo to image", "add text watermark to photo", "batch watermark images", "watermark multiple photos at once", and "protect photos with watermark" without uploading files to an online service.
 
-## Features
+## 20-Second Quickstart: watermark images with a Python CLI
 
-- CLI-first workflow using Typer
-- Beginner-friendly interactive wizard (`watermarker add`)
-- Expert one-liner mode with full flags
-- Image watermark or text watermark
-- Supported inputs: `jpg`, `jpeg`, `png`, `webp`, `tiff`, `bmp`, `gif`
-- GIF support processes the first frame only
-- EXIF orientation correction on load
-- Batch output summary with processed/skipped/failed counts
-- Dry-run planning mode (`--dry-run`)
+```powershell
+pipx install watermarker
+watermarker add
+# Expert one-liner: add text watermark to photo
+watermarker add --input ".\photo.jpg" --text "(c) ACME" --pos br --opacity 40
+```
 
-## Install
+## Install watermarker for batch watermark, logo watermark, and text watermark
 
-### pipx (recommended for CLI tools)
+### A) Install (Recommended): pipx
 
-```bash
+```powershell
+pipx install watermarker
+```
+
+If `pipx` is not on PATH yet:
+
+```powershell
+pipx ensurepath
+```
+
+### B) Install (Alternative): pip
+
+```powershell
+python -m pip install watermarker
+```
+
+### C) Install from source (repo clone)
+
+```powershell
+git clone https://github.com/ibrahimm7004/add-watermark.git
+cd add-watermark
+```
+
+Install from this repo with `pipx`:
+
+```powershell
 pipx install .
 ```
 
-### pip
+Install from this repo with `pip`:
 
-```bash
+```powershell
 python -m pip install .
 ```
 
-For development:
+### D) Uninstall (pipx and pip)
 
-```bash
-python -m pip install -e .[dev]
+```powershell
+pipx uninstall watermarker
+python -m pip uninstall watermarker
 ```
 
-## Quickstart (Beginner Wizard)
+## Before and after: put watermark on picture
 
-Run without required arguments and the wizard will prompt for everything:
+| Before | After |
+| --- | --- |
+| ![Before watermark example](examples/before.png) | ![After watermark example](examples/after.png) |
 
-```bash
+Regenerate both demo images:
+
+```powershell
+python examples/generate_examples.py
+```
+
+## Add watermark to photo: wizard and expert one-liners
+
+Beginner wizard:
+
+```powershell
 watermarker add
 ```
 
-You will be prompted for:
+Single image with text watermark:
 
-- single vs batch mode
-- input path/pattern
-- watermark type (image or text)
-- watermark image path or text content
-- position (`tl`, `tr`, `bl`, `br`, `c`)
-- opacity (`0-100`, where `100` is fully visible)
-- output path
-
-## Expert One-Liners
-
-Single image + image watermark:
-
-```bash
-watermarker add --input .\photo.jpg --watermark .\logo.png --pos br --opacity 40
+```powershell
+watermarker add --input ".\photo.jpg" --text "(c) ACME Studio" --pos br --opacity 40
 ```
 
-Single image + text watermark:
+Single image with logo watermark:
 
-```bash
-watermarker add --input .\photo.png --text "(c) ACME" --pos tr --opacity 60
+```powershell
+watermarker add --input ".\photo.jpg" --watermark ".\logo.png" --pos tr --opacity 35
 ```
 
-Folder batch (non-recursive):
+Batch watermark folder:
 
-```bash
-watermarker add --input .\images --watermark .\logo.png --opacity 35
+```powershell
+watermarker add --input ".\photos" --watermark ".\logo.png" --pos br --opacity 35
 ```
 
-Folder batch (recursive):
+Batch watermark folder recursively:
 
-```bash
-watermarker add --input .\images --recursive --text "CONFIDENTIAL" --pos c --opacity 25
+```powershell
+watermarker add --input ".\photos" --recursive --text "(c) ACME" --pos br --opacity 35
 ```
 
 Glob input:
 
-```bash
-watermarker add --input ".\images\**\*.png" --watermark .\logo.png --opacity 30
+```powershell
+watermarker add --input ".\photos\**\*.png" --watermark ".\logo.png" --opacity 35
 ```
 
-Dry-run planning:
+Dry run (plan only):
 
-```bash
-watermarker add --input .\images --watermark .\logo.png --dry-run
+```powershell
+watermarker add --input ".\photos" --watermark ".\logo.png" --dry-run
 ```
 
-## CLI Reference
+## Defaults
+
+`watermarker add` defaults (from current implementation):
+
+- Default position: `br`
+- Default opacity: `35` (`0` is invisible, `100` is fully visible)
+- Default corner margin: `24px`
+- Image watermark default scale: target width is about `20%` of base image width, clamped to at least `48px` and at most `80%` of base width
+- Text watermark default scale: font size is about `5%` of image width, clamped to `16..256`
+- Text watermark style: white text with black stroke and subtle shadow for readability
+- Single-image default output: `<input_stem>_watermarked.<ext>` next to input
+- Batch default output (folder input): `watermarked/` next to the input folder
+- Batch default output (glob input): `./watermarked/` in current working directory
+- Batch mode preserves relative folder structure for folder input
+- Without `--overwrite`, existing destination paths are not replaced; a `_watermarked` suffix is appended to avoid collisions
+
+## Windows notes
+
+- Quote paths that contain spaces:
+  - PowerShell/CMD: `--input "C:\Users\me\My Photos\photo 01.jpg"`
+- Quote globs to keep behavior consistent across shells and avoid shell expansion differences:
+  - `--input ".\photos\**\*.jpg"`
+- PowerShell example:
+
+```powershell
+watermarker add --input ".\My Photos\Client A" --recursive --text "(c) ACME" --pos br --opacity 35
+```
+
+- CMD example:
+
+```cmd
+watermarker add --input ".\My Photos\*.jpg" --watermark ".\brand logo.png" --pos tr --opacity 35
+```
+
+## Why offline CLI (vs online watermark tools)
+
+If you are searching for "add watermark to image online free", an offline CLI is often better for production workflows:
+
+- Privacy: images stay on your machine
+- Speed: no upload/download loop
+- Batch scale: watermark hundreds of files in one command
+- Automation: scriptable for product photos, photography delivery, and repeatable pipelines
+
+## Supported formats and behavior
+
+- Input/output formats: `jpg`, `jpeg`, `png`, `webp`, `tiff`, `bmp`, `gif`
+- GIF behavior: first frame only
+- JPEG output is written as RGB (quality 95)
+- PNG/WEBP preserve alpha when present
+
+## Common searches this tool solves
+
+- how to add watermark to image
+- add watermark to photo
+- put watermark on picture
+- how to watermark a photo
+- add logo to image
+- add text watermark to photo
+- batch watermark images
+- bulk watermark photos
+- watermark multiple photos at once
+- add watermark to 100 photos
+- signature watermark
+- copyright watermark on images
+
+## CLI reference
 
 ```text
 watermarker add [OPTIONS]
 
 Options:
-  --input, -i      File, folder, or glob pattern
-  --output, -o     Output file (single) or output folder (batch)
+  --input, -i      File path, folder path, or glob pattern
+  --output, -o     Output file (single mode) or output folder (batch mode)
   --watermark, -w  Watermark image path
   --text, -t       Text watermark content
   --pos            Watermark position: tl|tr|bl|br|c
   --opacity        Opacity 0-100 (0 invisible, 100 fully visible)
   --recursive      Recurse subfolders for folder input
   --overwrite      Overwrite existing outputs
-  --dry-run        Print planned outputs without writing
-  --verbose        Show traceback/debug details on errors
+  --dry-run        Print planned outputs without writing files
+  --verbose        Show traceback/debug details
 ```
 
-Validation:
+Validation rules:
 
-- Exactly one of `--watermark` or `--text` must be provided in non-interactive mode.
-- If `--input` is missing, the wizard prompts for it.
+- Exactly one of `--watermark` or `--text` in non-interactive mode
+- If `--input` is missing, wizard prompts for required fields
 
-## Output Rules
+## Library usage (optional)
 
-Single input defaults:
+CLI is the primary interface. If you need direct Python usage:
 
-- Output path defaults to `<input_stem>_watermarked.<ext>` next to input.
+```python
+from pathlib import Path
 
-Batch defaults:
+from watermarker.engine import process_single
 
-- Folder input defaults to `watermarked/` next to the input folder.
-- Glob input defaults to `./watermarked/` in the current working directory.
-- Folder mode preserves relative folder structure under output.
+process_single(
+    input_path=Path("photo.jpg"),
+    output_path=Path("photo_watermarked.jpg"),
+    text="(c) ACME",
+    position="br",
+    opacity=35,
+    overwrite=True,
+)
+```
 
-Overwrite behavior:
+## Open source trust signals
 
-- Without `--overwrite`, output collisions are avoided by adding `_watermarked` (and incrementing if needed).
-- With `--overwrite`, existing output paths are replaced.
+- CI workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
+- Tests: `pytest` suite for position logic, opacity mapping, and integration behavior
+- Lint/format checks: `ruff check .` and `ruff format --check .`
+- Contribution guide: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+- Code of conduct: [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)
+- Changelog: [`CHANGELOG.md`](CHANGELOG.md)
+- License: [`MIT`](LICENSE)
 
-## Watermark Defaults (v1)
-
-- Corner margin: `24px`
-- Image watermark scale: target width is ~20% of base image width (with clamp)
-- Text watermark font size: derived from image width (~5% with clamp)
-- Text styling: white text with subtle black stroke/shadow for readability
-
-Font behavior:
-
-- `watermarker` attempts common system fonts first.
-- If unavailable, it falls back to Pillow's default font.
-
-## Supported Formats
-
-Input and output formats:
-
-- `jpg`, `jpeg`, `png`, `webp`, `tiff`, `bmp`, `gif`
-
-Notes:
-
-- GIF processing uses only the first frame.
-- JPEG output is saved as RGB (quality 95).
-- PNG/WEBP preserve alpha when present.
-
-## Exit Codes
-
-- `0`: success
-- `1`: processing/runtime error
-- `2`: argument/validation error
-
-## Troubleshooting (FAQ)
+## FAQ and troubleshooting
 
 ### `watermarker` command is not found on Windows
 
-- If you installed with pip, make sure your Python scripts directory is on `PATH`.
-- With pipx, run `pipx ensurepath` and restart the terminal.
+- For `pipx` installs, run `pipx ensurepath` and restart terminal.
+- For `pip` installs, ensure your Python Scripts directory is on PATH.
 
-### Pillow install issues
+### Why does GIF output look static?
 
-- Upgrade pip first: `python -m pip install --upgrade pip`
-- Then reinstall: `python -m pip install -e .[dev]`
+- v1 processes only the first GIF frame.
 
-### Why does my GIF output look static?
+### Why can text look slightly different across machines?
 
-- v1 intentionally processes only the first frame of GIFs.
-
-### Why is text font different across machines?
-
-- The tool tries common system fonts and falls back to Pillow default if needed.
+- The tool tries common system fonts first and falls back to Pillow default when needed.
 
 ## Development
 
-Run checks locally:
-
-```bash
+```powershell
+python -m pip install -e .[dev]
 ruff check .
 ruff format --check .
 pytest
 ```
-
