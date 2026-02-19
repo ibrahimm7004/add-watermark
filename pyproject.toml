@@ -31,9 +31,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/example/add-watermark"
-Repository = "https://github.com/example/add-watermark"
-Issues = "https://github.com/example/add-watermark/issues"
+Homepage = "https://github.com/ibrahimm7004/add-watermark"
+Repository = "https://github.com/ibrahimm7004/add-watermark"
+Issues = "https://github.com/ibrahimm7004/add-watermark/issues"
+Changelog = "https://github.com/ibrahimm7004/add-watermark/blob/main/CHANGELOG.md"
 
 [project.scripts]
 watermarker = "watermarker.cli:main"

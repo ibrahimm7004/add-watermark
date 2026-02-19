@@ -266,7 +266,11 @@ def save_image(image: Image.Image, path: Path) -> None:
     if fmt == "JPEG":
         image.convert("RGB").save(path, format=fmt, quality=95)
     elif fmt == "GIF":
-        image.convert("RGBA").save(path, format=fmt)
+        image_rgba = image.convert("RGBA")
+        image_rgb = Image.new("RGB", image_rgba.size, (255, 255, 255))
+        image_rgb.paste(image_rgba, mask=image_rgba.getchannel("A"))
+        image_palette = image_rgb.convert("P", palette=Image.Palette.ADAPTIVE, colors=256)
+        image_palette.save(path, format=fmt)
     else:
         image.save(path, format=fmt)
 

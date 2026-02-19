@@ -74,7 +74,11 @@ def _run_wizard(
         pos = _prompt_choice("Position", ["tl", "tr", "bl", "br", "c"], DEFAULT_POSITION)
 
     if opacity is None:
-        opacity = typer.prompt("Opacity (0-100)", type=int, default=DEFAULT_OPACITY)
+        opacity = typer.prompt(
+            "Opacity (0-100, 0=invisible, 100=fully visible)",
+            type=int,
+            default=DEFAULT_OPACITY,
+        )
 
     if output is None:
         output_value = typer.prompt("Output path (leave blank for default)", default="")

@@ -134,6 +134,7 @@ watermarker add --input ".\photos" --watermark ".\logo.png" --dry-run
 - Batch default output (folder input): `watermarked/` next to the input folder
 - Batch default output (glob input): `./watermarked/` in current working directory
 - Batch mode preserves relative folder structure for folder input
+- For glob input, paths are preserved only when files are under the current working directory; otherwise output falls back to filenames under `./watermarked/`
 - Without `--overwrite`, existing destination paths are not replaced; a `_watermarked` suffix is appended to avoid collisions
 
 ## Windows notes
