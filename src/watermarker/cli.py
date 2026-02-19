@@ -8,6 +8,7 @@ import click
 import typer
 from rich.console import Console
 
+from watermarker import __version__
 from watermarker.engine import (
     DEFAULT_OPACITY,
     DEFAULT_POSITION,
@@ -23,11 +24,21 @@ from watermarker.engine import (
 
 app = typer.Typer(
     name="wmk",
-    help="Python CLI for batch image watermarking with logo or text.",
+    help=(
+        "Python CLI for batch image watermarking with logo or text. "
+        "Commands: wmk (primary), add-watermark (alias)."
+    ),
     add_completion=False,
     no_args_is_help=True,
 )
 console = Console()
+
+
+def _version_callback(value: bool) -> None:
+    if value:
+        typer.echo(f"add-watermark {__version__}")
+        raise typer.Exit()
+
 
 INPUT_OPTION = typer.Option(
     None,
@@ -85,10 +96,17 @@ VERBOSE_OPTION = typer.Option(
     "--verbose",
     help="Show traceback details for errors.",
 )
+VERSION_OPTION = typer.Option(
+    None,
+    "--version",
+    callback=_version_callback,
+    is_eager=True,
+    help="Show version and exit.",
+)
 
 
 @app.callback()
-def root() -> None:
+def root(version: bool | None = VERSION_OPTION) -> None:
     """wmk command group."""
 
 

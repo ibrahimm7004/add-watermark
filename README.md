@@ -7,7 +7,7 @@
 
 Python CLI for batch image watermarking with logo or text.
 
-`wmk` is built for people searching "how to add watermark to image", "add watermark to photo", "put watermark on picture", "add logo to image", "add text watermark to photo", "batch watermark images", "watermark multiple photos at once", and "protect photos with watermark" without uploading files to an online service.
+`wmk` is built for people searching "how to add watermark to image", "add watermark to photo", "put watermark on picture", "add logo to image", "add text watermark to photo", "batch watermark images", "watermark multiple photos at once", and "protect photos with watermark".
 
 ## 20-Second Quickstart: watermark images with a Python CLI
 
@@ -66,10 +66,30 @@ pipx uninstall add-watermark
 python -m pip uninstall add-watermark
 ```
 
+You can also run the beginner-friendly alias:
+
+```powershell
+add-watermark add
+```
+
+## Versioning
+
+This project follows Semantic Versioning (`MAJOR.MINOR.PATCH`):
+
+- `MAJOR`: breaking CLI/API changes
+- `MINOR`: backward-compatible features
+- `PATCH`: backward-compatible fixes
+
+Check the installed CLI version:
+
+```powershell
+wmk --version
+```
+
 ## Before and after: put watermark on picture
 
-| Before | After |
-| --- | --- |
+| Before                                           | After                                          |
+| ------------------------------------------------ | ---------------------------------------------- |
 | ![Before watermark example](examples/before.png) | ![After watermark example](examples/after.png) |
 
 Regenerate both demo images:
@@ -263,4 +283,3 @@ ruff check .
 ruff format --check .
 pytest
 ```
-
